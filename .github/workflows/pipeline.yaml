@@ -1,0 +1,33 @@
+name: CI pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    # This defines the "runner" (the virtual machine)
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Pulls your code from the repository onto the runner
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      # 2. Sets up the environment (Node.js example)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # 3. Installs dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Runs your tests or build script
+      - name: Run test
+        run: npm run test
+
+
